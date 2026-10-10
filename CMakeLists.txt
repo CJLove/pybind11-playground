@@ -17,9 +17,12 @@ message(STATUS "Python user site-packages: ${PYTHON_USER_SITE}")
 # Find Python and pybind11 packages
 find_package(Python COMPONENTS Interpreter Development REQUIRED)
 find_package(pybind11 CONFIG REQUIRED)
+find_package(spdlog CONFIG REQUIRED)
 
 # Define the python extension module
 pybind11_add_module(example_module main.cpp)
+
+target_link_libraries(example_module PRIVATE spdlog::spdlog)
 
 # Alternatively, using the standard target approach:
 # Python_add_library(example_module main.cpp)
